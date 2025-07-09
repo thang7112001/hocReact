@@ -15,12 +15,16 @@ export default function ListProduct() {
     let [item, setItem] = useState('');
     let [itemPrice, setItemPrice] = useState('');
     let [itemQuantity, setItemQuantity] = useState('');
-    let [itemCate, setItemCate] = useState([...categoryList]);
+    let [itemCate, setItemCate] = useState('');
     let [search, setSearch] = useState('');
     let [editIndex, setEditIndex] = useState(null);
     let [sortOrder, setSortOrder] = useState('none');
 
     function addProducts() {
+        if(!item || !itemPrice||!itemQuantity||!itemCate){
+            alert("vui lòng nhập đầy đủ thông tin");
+            return;
+        }
         const newProduct = {
             name: item,
             price: Number(itemPrice),
@@ -84,8 +88,8 @@ export default function ListProduct() {
         }
     }
     function addCategory() {
-        const newCate = [addCate];
-        setCategoryList([...categoryList,newCate]);
+        if  (addCate.trim()==="")return;
+        setCategoryList([...categoryList,addCate]);
         setAddCate('');
     }
 
@@ -153,8 +157,9 @@ export default function ListProduct() {
                     onChange={(e) => setItemQuantity(e.target.value)}
                 />
                 <select value={itemCate}
-                        onChange={(e)=>{setItemCate([...categoryList])}}
+                        onChange={(e)=>{setItemCate(e.target.value)}}
                 >
+                    <option value={""}>--Chọn danh mục--</option>{}
                     {
                         categoryList.map((y, index) => (
                             <option value={y} key={index}>
