@@ -23,7 +23,8 @@ export default function ListProduct() {
         const newProduct = {
             name: item,
             price: Number(itemPrice),
-            quantity: Number(itemQuantity)
+            quantity: Number(itemQuantity),
+            category:
         };
 
         if (editIndex !== null) {
@@ -38,6 +39,7 @@ export default function ListProduct() {
         setItem('');
         setItemPrice('');
         setItemQuantity('');
+        setAddCate('');
     }
 
     function deleteProduct(index) {
@@ -87,10 +89,11 @@ export default function ListProduct() {
 
     return (
         <div style={{ padding: '20px' }}>
-            <input type="text"
-                   placeholder={'nhap cate'}
-                   value={addCate}
-                   onChange={(e)=>setAddCate(e.target.value)}
+            <input
+                type="text"
+                placeholder="Them category"
+                value={addCate}
+                onChange={(e) => setAddCate(e.target.value)}
             />
             <button onClick={addCategory}>add</button>
             {
@@ -120,7 +123,7 @@ export default function ListProduct() {
                 {findProducts().map((product, index) => (
                     <div key={index}>
                         <h4>
-                            {product.name}: {product.price}₫ - SL: {product.quantity}
+                            {product.name}: {product.price}₫ - SL: {product.quantity} - {product.category}
                             <button onClick={() => editProduct(index)} >Sửa</button>
                             <button onClick={() => deleteProduct(index)}>Xóa</button>
                         </h4>
@@ -147,6 +150,18 @@ export default function ListProduct() {
                     placeholder="Tồn kho"
                     onChange={(e) => setItemQuantity(e.target.value)}
                 />
+                <select value={products.category}
+                        onChange={(e)=>{setProducts({...products,category: e.target.value})}}
+                >
+                    {
+                        categoryList.map((y, index) => (
+                            <option value={y} key={index}>
+                                {y}
+                            </option>
+                        ))
+                    }
+                </select>
+
                 <button onClick={addProducts}>
                     {editIndex !== null ? 'Cập nhật' : 'Thêm'}
                 </button>
