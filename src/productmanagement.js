@@ -15,6 +15,7 @@ export default function ListProduct() {
     let [item, setItem] = useState('');
     let [itemPrice, setItemPrice] = useState('');
     let [itemQuantity, setItemQuantity] = useState('');
+    let [itemCate, setItemCate] = useState([...categoryList]);
     let [search, setSearch] = useState('');
     let [editIndex, setEditIndex] = useState(null);
     let [sortOrder, setSortOrder] = useState('none');
@@ -24,7 +25,7 @@ export default function ListProduct() {
             name: item,
             price: Number(itemPrice),
             quantity: Number(itemQuantity),
-            category:
+            category: itemCate
         };
 
         if (editIndex !== null) {
@@ -39,7 +40,7 @@ export default function ListProduct() {
         setItem('');
         setItemPrice('');
         setItemQuantity('');
-        setAddCate('');
+        setItemCate('');
     }
 
     function deleteProduct(index) {
@@ -52,6 +53,7 @@ export default function ListProduct() {
         setItem(p.name);
         setItemPrice(p.price);
         setItemQuantity(p.quantity);
+        setItemCate(p.category);
         setEditIndex(index);
     }
 
@@ -150,8 +152,8 @@ export default function ListProduct() {
                     placeholder="Tồn kho"
                     onChange={(e) => setItemQuantity(e.target.value)}
                 />
-                <select value={products.category}
-                        onChange={(e)=>{setProducts({...products,category: e.target.value})}}
+                <select value={itemCate}
+                        onChange={(e)=>{setItemCate([...categoryList])}}
                 >
                     {
                         categoryList.map((y, index) => (
