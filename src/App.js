@@ -1,11 +1,11 @@
 
 import './App.css';
-import ListProduct from "./productmanagement";
+import HomestayManager from "./homeStay";
 
 function App() {
   return (
     <>
-       <ListProduct></ListProduct>
+       <HomestayManager></HomestayManager>
     </>
   );
 }
